@@ -1,0 +1,17 @@
+CREATE TABLE employees (
+  employee_id INT PRIMARY KEY,
+  name VARCHAR(100),
+  age INT,
+  department VARCHAR(50),
+  salary DECIMAL(10,2),
+  join_date DATE
+);
+
+CREATE TABLE satisfaction (
+  employee_id INT PRIMARY KEY,
+  job_satisfaction INT,
+  work_life_balance INT,
+  overtime BOOLEAN,
+  left_company BOOLEAN,
+  FOREIGN KEY (employee_id) REFERENCES employees(employee_id)
+);
