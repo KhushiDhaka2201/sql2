@@ -1,0 +1,14 @@
+-- Overall Attrition Rate
+SELECT COUNT(CASE WHEN left_company THEN 1 END) * 100.0 / COUNT(*) AS attrition_rate FROM satisfaction;
+
+-- Department-wise Attrition
+SELECT e.department, COUNT(*) AS total_employees, SUM(CASE WHEN s.left_company THEN 1 ELSE 0 END) AS employees_left
+FROM employees e JOIN satisfaction s ON e.employee_id = s.employee_id GROUP BY e.department;
+
+-- Overtime and Attrition
+SELECT overtime, COUNT(*) AS total_count, SUM(CASE WHEN left_company THEN 1 ELSE 0 END) AS left_count
+FROM satisfaction GROUP BY overtime;
+
+-- Job Satisfaction vs Attrition
+SELECT job_satisfaction, SUM(CASE WHEN left_company THEN 1 ELSE 0 END) AS left_count
+FROM satisfaction GROUP BY job_satisfaction;
